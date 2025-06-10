@@ -9,11 +9,20 @@
   outputs = { self, nixpkgs, systems }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
-      eachNginx = nixpkgs.lib.genAttrs [ "nginxQuic" "nginxStable" "nginxMainline" ];
-      pkgs = import nixpkgs { overlays = [ self.overlays.default ]; };
+      eachNginx = nixpkgs.lib.genAttrs [
+        "nginxQuic"
+        "nginxStable"
+        "nginxMainline"
+      ];
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ self.overlays.default ];
+        };
     in
     {
-      packages = eachSystem (_system: eachNginx (nginxAttr: pkgs.${nginxAttr}));
+      packages = eachSystem (system: eachNginx (nginxAttr: (pkgsFor system).${nginxAttr}));
 
       overlays.default = _final: prev:
         eachNginx (nginxAttr:
