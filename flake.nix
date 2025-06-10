@@ -6,7 +6,12 @@
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = { self, nixpkgs, systems }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      systems,
+    }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
       eachNginx = nixpkgs.lib.genAttrs [
@@ -24,8 +29,10 @@
     {
       packages = eachSystem (system: eachNginx (nginxAttr: (pkgsFor system).${nginxAttr}));
 
-      overlays.default = _final: prev:
-        eachNginx (nginxAttr:
+      overlays.default =
+        _final: prev:
+        eachNginx (
+          nginxAttr:
           prev.${nginxAttr}.overrideAttrs (attrs: {
             patches = attrs.patches ++ [ ./patches/bad_gateway_nginx_1.25.4.patch ];
           })
