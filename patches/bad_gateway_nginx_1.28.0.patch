@@ -1,0 +1,55 @@
+diff --git a/src/http/ngx_http_special_response.c b/src/http/ngx_http_special_response.c
+index eaf42e399..278090881 100644
+--- a/src/http/ngx_http_special_response.c
++++ b/src/http/ngx_http_special_response.c
+@@ -298,10 +298,48 @@ static char ngx_http_error_501_page[] =
+ 
+ 
+ static char ngx_http_error_502_page[] =
++"<!DOCTYPE html>" CRLF
+ "<html>" CRLF
+-"<head><title>502 Bad Gateway</title></head>" CRLF
++"" CRLF
++"<head>" CRLF
++"  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />" CRLF
++"  <meta name=\"color-scheme\" content=\"light dark\" />" CRLF
++"  <title>Bad Gateway</title>" CRLF
++"  <style>" CRLF
++"    body {" CRLF
++"      font-family: system-ui, sans-serif;" CRLF
++"      color: black;" CRLF
++"    }" CRLF
++"" CRLF
++"    h1 {" CRLF
++"      font-size: 60px;" CRLF
++"      margin-top: 0;" CRLF
++"    }" CRLF
++"" CRLF
++"    h2 {" CRLF
++"      font-size: 23px;" CRLF
++"      margin-bottom: 0;" CRLF
++"    }" CRLF
++"" CRLF
++"    div {" CRLF
++"      background-color: #F0C900;" CRLF
++"      border: 10px solid black;" CRLF
++"      border-radius: 25px;" CRLF
++"      outline: 5px solid #F0C900;" CRLF
++"      padding: 60px 20px;" CRLF
++"      width: 450px;" CRLF
++"      margin: 23px auto 0 auto;" CRLF
++"    }" CRLF
++"  </style>" CRLF
++"</head>" CRLF
++"" CRLF
+ "<body>" CRLF
+-"<center><h1>502 Bad Gateway</h1></center>" CRLF
++"  <div>" CRLF
++"    <center>" CRLF
++"      <h1>Bad Gateway</h1>" CRLF
++"      <h2>Internetkurort</h2>" CRLF
++"    </center>" CRLF
++"  </div>" CRLF
+ ;
+ 
+ 

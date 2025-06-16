@@ -34,7 +34,7 @@
         eachNginx (
           nginxAttr:
           prev.${nginxAttr}.overrideAttrs (attrs: {
-            patches = attrs.patches ++ [ ./patches/bad_gateway_nginx_1.25.4.patch ];
+            patches = attrs.patches ++ [ ./patches/bad_gateway_nginx_1.28.0.patch ];
           })
         );
     };
